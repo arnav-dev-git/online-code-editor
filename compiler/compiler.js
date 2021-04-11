@@ -88,7 +88,7 @@ export const cppExecuter = (data, input) => {
     // const outputFileName = "output.txt";
 
     //compile c code
-    exec("g++ " + fileName, (err, stdout, stderr) => {
+    exec("gcc " + fileName, (err, stdout, stderr) => {
       if (err) {
         // console.error("Exec error => ", err);
         resolve({
@@ -98,7 +98,7 @@ export const cppExecuter = (data, input) => {
         });
       }
       //successfully compiled
-      exec("a.exe < " + "cppinput.txt", (err, stdout, stderr) => {
+      exec("./a.out < " + "cppinput.txt", (err, stdout, stderr) => {
         if (err) {
           //   console.error("runtime error => ", err);
           resolve({
