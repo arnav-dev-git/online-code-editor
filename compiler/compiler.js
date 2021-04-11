@@ -133,20 +133,23 @@ export const pythonExecuter = (data, input) => {
     // const outputFileName = "output.txt";
 
     //compile python code
-    exec("py -3 " + fileName + " < " + "pinput.txt", (err, stdout, stderr) => {
-      if (err) {
-        // console.error("Exec error => ", err);
+    exec(
+      "python3 " + fileName + " < " + "pinput.txt",
+      (err, stdout, stderr) => {
+        if (err) {
+          // console.error("Exec error => ", err);
+          resolve({
+            err: true,
+            output: err,
+            error: stderr,
+          });
+        }
         resolve({
-          err: true,
-          output: err,
-          error: stderr,
+          err: false,
+          output: stdout,
         });
       }
-      resolve({
-        err: false,
-        output: stdout,
-      });
-    });
+    );
   });
 };
 
