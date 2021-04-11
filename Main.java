@@ -1,7 +1,12 @@
-class Mai0n{
+import java.util.Scanner; 
+import java.util.*; //yo sup ?
 
-    public static void main(String[] args){
-        System.out.println("Hello World from Java !");
-        //write your code here ...
-    }
+class Main{
+  public static void main(String[] args) {
+    Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+    System.out.println("Enter username");
+
+    String userName = myObj.nextLine();  // Read user input
+    System.out.println("Username is: " + userName);  // Output user input
+  }
 }

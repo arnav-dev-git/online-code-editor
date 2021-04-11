@@ -194,7 +194,7 @@ export const javaExecuter = (data, input) => {
   return new Promise((resolve, reject) => {
     const fileName = "Main.java";
 
-    console.log(data[6] + data[7] + data[8] + data[9] + data[10]);
+    // console.log(data[6] + data[7] + data[8] + data[9] + data[10]);
     if (data[6] + data[7] + data[8] + data[9] + data[10] !== "Main{") {
       resolve({
         err: true,
