@@ -52,7 +52,7 @@ export const cExecuter = (data, input) => {
         });
       }
       //successfully compiled
-      exec("./a.out < " + "input.txt", (err, stdout, stderr) => {
+      exec("a.exe < " + "input.txt", (err, stdout, stderr) => {
         if (err) {
           //   console.error("runtime error => ", err);
           resolve({
@@ -98,7 +98,7 @@ export const cppExecuter = (data, input) => {
         });
       }
       //successfully compiled
-      exec("./a.out < " + "cppinput.txt", (err, stdout, stderr) => {
+      exec("a.exe < " + "cppinput.txt", (err, stdout, stderr) => {
         if (err) {
           //   console.error("runtime error => ", err);
           resolve({
@@ -133,23 +133,20 @@ export const pythonExecuter = (data, input) => {
     // const outputFileName = "output.txt";
 
     //compile python code
-    exec(
-      "python3 " + fileName + " < " + "pinput.txt",
-      (err, stdout, stderr) => {
-        if (err) {
-          // console.error("Exec error => ", err);
-          resolve({
-            err: true,
-            output: err,
-            error: stderr,
-          });
-        }
+    exec("py -3 " + fileName + " < " + "pinput.txt", (err, stdout, stderr) => {
+      if (err) {
+        // console.error("Exec error => ", err);
         resolve({
-          err: false,
-          output: stdout,
+          err: true,
+          output: err,
+          error: stderr,
         });
       }
-    );
+      resolve({
+        err: false,
+        output: stdout,
+      });
+    });
   });
 };
 
@@ -219,7 +216,7 @@ export const javaExecuter = (data, input) => {
         });
       }
       //successfully compiled
-      exec("java -cp . Main < " + "javainput.txt", (err, stdout, stderr) => {
+      exec("java Main < " + "javainput.txt", (err, stdout, stderr) => {
         if (err) {
           //   console.error("runtime error => ", err);
           resolve({
