@@ -88,7 +88,7 @@ export const cppExecuter = (data, input) => {
     // const outputFileName = "output.txt";
 
     //compile c code
-    exec("gcc " + fileName, (err, stdout, stderr) => {
+    exec("g++ " + fileName, (err, stdout, stderr) => {
       if (err) {
         // console.error("Exec error => ", err);
         resolve({
