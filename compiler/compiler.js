@@ -219,7 +219,7 @@ export const javaExecuter = (data, input) => {
         });
       }
       //successfully compiled
-      exec("java -cp . Main < " + "javainput.txt", (err, stdout, stderr) => {
+      exec("java Main < " + "javainput.txt", (err, stdout, stderr) => {
         if (err) {
           //   console.error("runtime error => ", err);
           resolve({
