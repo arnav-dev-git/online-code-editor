@@ -129,9 +129,6 @@ export const pythonExecuter = (data, input) => {
 
     //file saved successfully
 
-    //generate the output file
-    // const outputFileName = "output.txt";
-
     //compile python code
     exec("py -3 " + fileName + " < " + "pinput.txt", (err, stdout, stderr) => {
       if (err) {
