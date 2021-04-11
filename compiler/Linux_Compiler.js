@@ -88,7 +88,7 @@ export const cppExecuter = (data, input) => {
     // const outputFileName = "output.txt";
 
     //compile c code
-    exec("g++ " + fileName, (err, stdout, stderr) => {
+    exec("gcc " + fileName + " -lstdc++", (err, stdout, stderr) => {
       if (err) {
         // console.error("Exec error => ", err);
         resolve({
@@ -193,6 +193,16 @@ export const javascriptExecuter = (data, input) => {
 export const javaExecuter = (data, input) => {
   return new Promise((resolve, reject) => {
     const fileName = "Main.java";
+
+    console.log(data[6] + data[7] + data[8] + data[9] + data[10]);
+    if (data[6] + data[7] + data[8] + data[9] + data[10] !== "Main{") {
+      resolve({
+        err: true,
+        output: "Class name should be =>  class Main{ ... }",
+        error: "Class name should be =>  class Main{ ... }",
+      });
+    }
+
     saveFile(fileName, data).then(() => {
       fs.writeFile("javainput.txt", input, (err) => {
         if (err) {
