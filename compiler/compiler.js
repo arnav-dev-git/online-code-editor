@@ -52,7 +52,7 @@ export const cExecuter = (data, input) => {
         });
       }
       //successfully compiled
-      exec("a.exe < " + "input.txt", (err, stdout, stderr) => {
+      exec("./a.out < " + "input.txt", (err, stdout, stderr) => {
         if (err) {
           //   console.error("runtime error => ", err);
           resolve({
