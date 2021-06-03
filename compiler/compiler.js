@@ -151,38 +151,80 @@ export const pythonExecuter = (data, input) => {
 };
 
 //* function for executing Javascript code
+// export const javascriptExecuter = (data, input) => {
+//   return new Promise((resolve, reject) => {
+//     const fileName = "code.js";
+
+//     saveFile(fileName, data).then(() => {
+//       fs.writeFile("jsinput.txt", input, (err) => {
+//         if (err) {
+//           // console.log("Internam server error... ", err);
+//           reject("internal server error ...");
+//         }
+//       });
+//     });
+
+//     //file saved successfully
+
+//     //generate the output file
+//     // const outputFileName = "output.txt";
+
+//     setTimeout(() => {
+//       process.kill(sh.pid, 'SIGINT');
+//     }, 4000);
+
+//     //compile python code
+//     exec("node " + fileName + " < " + "jsinput.txt", (err, stdout, stderr) => {
+//       if (err) {
+//         // console.error("Exec error => ", err);
+//         resolve({
+//           err: true,
+//           output: err,
+//           error: stderr,
+//         });
+//       }
+//       resolve({
+//         err: false,
+//         output: stdout,
+//       });
+//     });
+//   });
+// };
+
 export const javascriptExecuter = (data, input) => {
   return new Promise((resolve, reject) => {
     const fileName = "code.js";
+
     saveFile(fileName, data).then(() => {
       fs.writeFile("jsinput.txt", input, (err) => {
         if (err) {
-          // console.log("Internam server error... ", err);
           reject("internal server error ...");
         }
       });
     });
 
-    //file saved successfully
-
-    //generate the output file
-    // const outputFileName = "output.txt";
-
-    //compile python code
-    exec("node " + fileName + " < " + "jsinput.txt", (err, stdout, stderr) => {
-      if (err) {
-        // console.error("Exec error => ", err);
+    // save the process in a const
+    const childProcess = exec(
+      "node " + fileName + " < " + "jsinput.txt",
+      { timeout: 4000 },
+      (err, stdout, stderr) => {
+        if (err) {
+          resolve({
+            err: true,
+            output: err,
+            error: stderr,
+          });
+        }
+        setTimeout(() => {
+          // kill it
+          childProcess.kill();
+        }, 10000);
         resolve({
-          err: true,
-          output: err,
-          error: stderr,
+          err: false,
+          output: stdout,
         });
       }
-      resolve({
-        err: false,
-        output: stdout,
-      });
-    });
+    );
   });
 };
 

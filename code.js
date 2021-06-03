@@ -1,3 +1,5 @@
 console.log("Hello World !");
 
-//write your code here ...
+setInterval(()=>{
+    console.log("hii");
+}, 500);
