@@ -38,7 +38,13 @@ const Code = () => {
       if (data.error) {
         setOutput(data.error);
       } else {
-        setOutput(data.output);
+        setOutput(
+          typeof data.output === "object"
+            ? data.output.killed === true
+              ? "Infinite Loop Detected"
+              : null
+            : data.output
+        );
       }
 
       setOutputLoading(false);
@@ -132,8 +138,8 @@ const Code = () => {
             id="code"
             width="80vw"
             height="90vh"
-            theme="vs-dark"
-            // theme="my-theme"
+            // theme="vs-dark"
+            theme="my-theme"
             options={{
               minimap: {
                 enabled: true,
